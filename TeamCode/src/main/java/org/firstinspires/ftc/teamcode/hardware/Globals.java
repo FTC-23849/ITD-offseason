@@ -16,10 +16,8 @@ public class Globals {
     public static double INTAKE_PIVOT_TRANSFER = 0.37;
     public static double INTAKE_PIVOT_PICKUP_READY = 0.11;
     public static double INTAKE_PIVOT_PICKUP = 0.06;
-    public static double INTAKE_PIVOT_DROP = 0.22;
-    public static double INTAKE_PIVOT_DROP_AUTO = 0.25;
+    public static double INTAKE_PIVOT_DROP = 0.25;
     public static double INTAKE_PIVOT_AVOID = 0.7;
-    public static double INTAKE_PIVOT_RETRACT = 0.35;
 
     // Intake Wrist
     public static double INTAKE_WRIST_STRAIGHT = 0.4;// 0.07 works, 0.574 should, done math to test

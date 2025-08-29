@@ -8,6 +8,10 @@ public class Drive {
 
     private final Robot robot = Robot.getInstance();
 
+    public void init() {
+        setPTO(PTOState.DISENGAGED);
+    }
+
     public enum PTOState {
         ENGAGED,
         DISENGAGED

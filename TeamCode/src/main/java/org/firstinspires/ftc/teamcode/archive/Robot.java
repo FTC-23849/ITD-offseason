@@ -53,7 +53,7 @@ public class Robot {
     public static double RIGHT_PTO_DISENGAGE = 0.5;
     public static double RIGHT_PTO_ENGAGE = 0.0; // 0.3 is loose, 0.2 is still too lose
 
-    //hange
+    //hang
     public static int OUTTAKE_MOTOR_L2_PREPARE = -500;
     public static int DRIVE_L2_HANG = 0;
     public static int OUTTAKE_MOTOR_L3_PREPARE = -850;
@@ -68,7 +68,7 @@ public class Robot {
             intakeTurret.setPosition(Robot.INTAKE_TURRET_PICKUP_STRAIGHT);
 
         }
-        //flipse everything that isnt turret
+        //flips everything that isnt turret
         public static void intakeNonTurretExtend(Servo intakePivot, Servo intakeWrist, Servo intakeClaw){
             intakePivot.setPosition(Robot.INTAKE_PIVOT_PICKUP_READY);
             intakeWrist.setPosition(Robot.INTAKE_WRIST_STRAIGHT);
