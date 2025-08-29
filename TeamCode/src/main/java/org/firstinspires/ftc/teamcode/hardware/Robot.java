@@ -1,68 +1,44 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
-import static org.firstinspires.ftc.teamcode.hardware.Globals.*;
-
-import android.security.keystore.StrongBoxUnavailableException;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
-import com.qualcomm.robotcore.hardware.configuration.ServoHubConfiguration;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.localization.Pose;
 import com.pedropathing.localization.PoseUpdater;
-import com.pedropathing.pathgen.BezierLine;
-import com.pedropathing.pathgen.PathChain;
-import com.pedropathing.pathgen.Point;
-import com.pedropathing.util.Constants;
-import com.qualcomm.hardware.lynx.LynxModule;
-import com.qualcomm.hardware.rev.RevColorSensorV3;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.configuration.LynxConstants;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.commandbase.Drive;
 import org.firstinspires.ftc.teamcode.commandbase.Deposit;
 import org.firstinspires.ftc.teamcode.commandbase.Intake;
 
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
-import com.pedropathing.follower.FollowerConstants;
-
-import java.util.List;
-
 public class Robot {
 
-    DcMotorEx leftFrontMotor;
-    DcMotorEx rightFrontMotor;
-    DcMotorEx leftBackMotor;
-    DcMotorEx rightBackMotor;
+    public DcMotorEx leftFrontMotor;
+    public DcMotorEx rightFrontMotor;
+    public DcMotorEx leftBackMotor;
+    public DcMotorEx rightBackMotor;
 
-    DcMotorEx outtakeSlideMotor_left;
-    DcMotorEx outtakeSlideMotor_right;
+    public DcMotorEx outtakeSlideMotor_left;
+    public DcMotorEx outtakeSlideMotor_right;
 
-    DcMotorEx intakeMotor;
-    Servo intakeTurret;
-    Servo intakePivot;
-    Servo intakeWrist;
-    Servo intakeClaw;
-    Servo outtakePivotLeft;
-    Servo outtakePivotRight;
-    Servo outtakeTurret;
-    Servo outtakeWrist;
-    Servo outtakeClaw;
-    ServoImplEx leftPto;
-    ServoImplEx rightPto;
-    Servo displayLight;
-    DistanceSensor alignerDistanceSensor;
+    public DcMotorEx intakeMotor;
+    public Servo intakeTurret;
+    public Servo intakePivot;
+    public Servo intakeWrist;
+    public Servo intakeClaw;
+    public Servo outtakePivotLeft;
+    public Servo outtakePivotRight;
+    public Servo outtakeTurret;
+    public Servo outtakeWrist;
+    public Servo outtakeClaw;
+    public ServoImplEx leftPTO;
+    public ServoImplEx rightPTO;
+    public Servo displayLight;
+    public DistanceSensor alignerDistanceSensor;
 
     public Deposit deposit;
     public Intake intake;
@@ -119,8 +95,8 @@ public class Robot {
         outtakeTurret = hardwareMap.get(Servo.class, "outtakeTurret");
         outtakeWrist = hardwareMap.get(Servo.class, "outtakeWrist");
         outtakeClaw = hardwareMap.get(Servo.class, "outtakeClaw");
-        leftPto = hardwareMap.get(ServoImplEx.class, "leftPto");
-        rightPto = hardwareMap.get(ServoImplEx.class, "rightPto");
+        leftPTO = hardwareMap.get(ServoImplEx.class, "leftPto");
+        rightPTO = hardwareMap.get(ServoImplEx.class, "rightPto");
         displayLight = hardwareMap.get(Servo.class, "displayLight");
 
         intakeMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
