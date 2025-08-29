@@ -64,6 +64,13 @@ public class Robot {
     Servo displayLight;
     DistanceSensor alignerDistanceSensor;
 
+    public Deposit deposit;
+    public Intake intake;
+    public Drive drive;
+
+    public Follower follower;
+    public PoseUpdater poseUpdater;
+
     // Singleton Implementation
 
     private static Robot instance = new Robot();
@@ -122,5 +129,17 @@ public class Robot {
         alignerDistanceSensor = hardwareMap.get(DistanceSensor.class, "alignerDistanceSensor");
 
     }
+
+    public enum RobotState {
+        INITIALIZED,
+        SAMPLE_INTAKING,
+        TRANSFERRING,
+        TRANSFERRED,
+        SAMPLE_SCORING,
+        SPECIMEN_INTAKING,
+        SPECIMEN_SCORING
+    }
+
+    public static RobotState robotState;
 
 }

@@ -34,7 +34,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Disabled
+//@Disabled
 @TeleOp(name = "DriverControl", group = "stuff")
 
 public class DriverControl extends OpMode {
