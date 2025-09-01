@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.commandbase.Drive;
 import org.firstinspires.ftc.teamcode.commandbase.Deposit;
 import org.firstinspires.ftc.teamcode.commandbase.Intake;
+import org.w3c.dom.ls.LSException;
 
 public class Robot {
 
@@ -77,7 +78,7 @@ public class Robot {
 
         outtakeSlideMotor_left = hardwareMap.get(DcMotorEx.class,"outtakeSlideMotor_left");
         outtakeSlideMotor_right = hardwareMap.get(DcMotorEx.class,"outtakeSlideMotor_right");
-        outtakeSlideMotor_right.setDirection(DcMotorEx.Direction.REVERSE);
+        outtakeSlideMotor_left.setDirection(DcMotorEx.Direction.REVERSE);
 
         outtakeSlideMotor_left.setZeroPowerBehavior(BRAKE);
         outtakeSlideMotor_right.setZeroPowerBehavior(BRAKE);

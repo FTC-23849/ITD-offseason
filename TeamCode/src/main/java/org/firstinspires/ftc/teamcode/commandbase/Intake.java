@@ -2,16 +2,30 @@ package org.firstinspires.ftc.teamcode.commandbase;
 
 import static org.firstinspires.ftc.teamcode.hardware.Globals.*;
 
+import com.qualcomm.robotcore.util.Range;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.controller.PIDFController;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-public class Intake {
+public class Intake extends SubsystemBase {
 
     private final Robot robot = Robot.getInstance();
 
-    public void init() {
+    public double target;
 
+    // Reached set position
+    public boolean extendoReached;
+    // Fully retracted
+    public boolean extendoRetracted;
+
+    public void init() {
+        setPivot(IntakePivotState.TRANSFER);
+        setTurret(IntakeTurretState.STRAIGHT);
+        setWrist(IntakeWristState.STRAIGHT);
+        setClaw(IntakeClawState.OPEN);
+        setExtendoTarget(0);
+        extendoPIDF.setTolerance(3);
     }
 
     public enum IntakePivotState {
@@ -46,6 +60,31 @@ public class Intake {
     public static IntakeWristState intakeWristState = IntakeWristState.STRAIGHT;
     public static IntakeClawState intakeClawState = IntakeClawState.OPEN;
     private static final PIDFController extendoPIDF = new PIDFController(0,0,0, 0);
+
+
+    public void setExtendoTarget(double target) {
+        this.target = Range.clip(target, 0, INTAKE_MOTOR_MAX_EXTENSION);
+        extendoPIDF.setSetPoint(this.target);
+    }
+
+    public void autoUpdateExtendo() {
+        double extendoPower = extendoPIDF.calculate(robot.intakeMotor.getCurrentPosition(), this.target);
+        extendoReached = (extendoPIDF.atSetPoint() && target > 0) || (robot.intakeMotor.getCurrentPosition() <= 3 && target == 0);
+        extendoRetracted = (target <= 0) && extendoReached;
+
+        // Just make sure it gets to fully retracted if target is 0
+        if (target == 0 && !extendoReached) {
+            extendoPower -= 0.2;
+        } else if (!extendoReached) {
+            extendoPower += 0.2;
+        }
+
+        if (extendoReached) {
+            robot.intakeMotor.setPower(0);
+        } else {
+            robot.intakeMotor.setPower(extendoPower);
+        }
+    }
 
     public void setPivot(IntakePivotState intakePivotState) {
         switch(intakePivotState) {
@@ -110,6 +149,11 @@ public class Intake {
                 robot.intakeClaw.setPosition(INTAKE_CLAW_CLOSE);
                 break;
         }
+    }
+
+    @Override
+    public void periodic() {
+        autoUpdateExtendo();
     }
 
 }

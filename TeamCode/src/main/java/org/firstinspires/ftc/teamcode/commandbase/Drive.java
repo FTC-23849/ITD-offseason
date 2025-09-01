@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode.commandbase;
 
 import static org.firstinspires.ftc.teamcode.hardware.Globals.*;
 
+import com.seattlesolvers.solverslib.command.SubsystemBase;
+
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-public class Drive {
+public class Drive extends SubsystemBase {
 
     private final Robot robot = Robot.getInstance();
 

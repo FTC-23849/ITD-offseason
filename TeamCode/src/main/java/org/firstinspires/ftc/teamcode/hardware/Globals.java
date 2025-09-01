@@ -30,7 +30,7 @@ public class Globals {
 
     // Extendo
     public static int INTAKE_MOTOR_RETRACT = 0;
-    public static int INTAKE_MOTOR_MAX_EXTEND = 750;
+    public static int INTAKE_MOTOR_MAX_EXTENSION = 750;
     public static int INTAKE_LOWER_ENCODER_TICKS = 250;
 
 
@@ -40,8 +40,7 @@ public class Globals {
     public static double OUTTAKE_PIVOT_TRANSFER = 0;
     public static double OUTTAKE_PIVOT_SAMPLE_SCORE = 0.8;
     public static double OUTTAKE_PIVOT_SPECIMEN_PICKUP = 1;
-    public static double OUTTAKE_PIVOT_HIGH_SPECIMEN_SCORE = 0.350;
-    public static double OUTTAKE_PIVOT_LOW_SPECIMEN_SCORE = 0.35;
+    public static double OUTTAKE_PIVOT_SPECIMEN_SCORE = 0.35;
     public static double OUTTAKE_PIVOT_HANG = 0.6;
 
     // Outtake Turret
@@ -63,9 +62,9 @@ public class Globals {
 
     // Outtake Slides
     public static int OUTTAKE_SLIDES_RETRACT = 0;
-    public static int OUTTAKE_SLIDES_MAX_EXTENSION = 0;
-    public static int OUTTAKE_SLIDES_SAMPLE_SCORE = -800;
-    public static int OUTTAKE_SLIDES_HIGH_SPECIMEN_SCORE = -375;
+    public static int OUTTAKE_SLIDES_MAX_EXTENSION = 800;
+    public static int OUTTAKE_SLIDES_SAMPLE_SCORE = 800;
+    public static int OUTTAKE_SLIDES_HIGH_SPECIMEN_SCORE = 375;
     public static int OUTTAKE_SLIDES_LOW_SPECIMEN_SCORE = 0;
 
 

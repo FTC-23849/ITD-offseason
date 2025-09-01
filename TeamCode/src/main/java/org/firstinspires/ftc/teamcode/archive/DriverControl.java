@@ -21,7 +21,6 @@ package org.firstinspires.ftc.teamcode.archive;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.FLOAT;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -60,6 +59,10 @@ public class DriverControl extends OpMode {
     ServoImplEx leftPto;
     ServoImplEx rightPto;
     Servo displayLight;
+
+    Servo cameraLight1;
+    Servo cameraLight2;
+
     DistanceSensor alignerDistanceSensor;
 
 
@@ -127,9 +130,14 @@ public class DriverControl extends OpMode {
         rightFrontMotor.setZeroPowerBehavior(BRAKE);
         rightBackMotor.setZeroPowerBehavior(BRAKE);
 
+        cameraLight1 = hardwareMap.get(Servo.class, "light1");
+        cameraLight2 = hardwareMap.get(Servo.class, "light2");
 
         outtakeSlideMotor_left = hardwareMap.get(DcMotorEx.class,"outtakeSlideMotor_left");
         outtakeSlideMotor_right = hardwareMap.get(DcMotorEx.class,"outtakeSlideMotor_right");
+
+        //make left motor reverse to use positive set target
+        //outtakeSlideMotor_left.setDirection(DcMotorEx.Direction.REVERSE);
         outtakeSlideMotor_right.setDirection(DcMotorEx.Direction.REVERSE);
 
         outtakeSlideMotor_left.setZeroPowerBehavior(BRAKE);
@@ -156,6 +164,9 @@ public class DriverControl extends OpMode {
         intakeMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
         alignerDistanceSensor = hardwareMap.get(DistanceSensor.class, "alignerDistanceSensor");
+
+        cameraLight1.setPosition(1.0);
+        cameraLight2.setPosition(1.0);
 
     }
 
