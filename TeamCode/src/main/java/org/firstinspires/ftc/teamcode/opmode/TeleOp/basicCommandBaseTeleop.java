@@ -22,11 +22,15 @@ public class basicCommandBaseTeleop extends CommandOpMode {
 
         robot.init(hardwareMap);
 
+        super.reset();
+
         gamepad.getGamepadButton(GamepadKeys.Button.DPAD_DOWN)
-                .whenPressed(new setOuttakePivot(robot, Deposit.DepositPivotState.TRANSFER));
+                .whenPressed(new setOuttakePivot(robot, Deposit.depositPivotState.TRANSFER));
 
         gamepad.getGamepadButton(GamepadKeys.Button.DPAD_UP)
-                .whenPressed(new setOuttakePivot(robot, Deposit.DepositPivotState.SAMPLE_SCORE));
+                .whenPressed(new setOuttakePivot(robot, Deposit.depositPivotState.SAMPLE_SCORE));
+
+        super.run();
 
     }
 

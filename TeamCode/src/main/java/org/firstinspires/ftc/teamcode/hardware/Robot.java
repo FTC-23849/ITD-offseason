@@ -105,6 +105,10 @@ public class Robot {
 
         alignerDistanceSensor = hardwareMap.get(DistanceSensor.class, "alignerDistanceSensor");
 
+        intake = new Intake();
+        deposit = new Deposit();
+        drive = new Drive();
+
     }
 
     public enum RobotState {
