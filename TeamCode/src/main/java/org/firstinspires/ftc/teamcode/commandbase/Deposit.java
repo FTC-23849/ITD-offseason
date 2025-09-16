@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.commandbase;
 
 import static org.firstinspires.ftc.teamcode.hardware.Globals.*;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.controller.PIDFController;
@@ -12,7 +13,8 @@ public class Deposit extends SubsystemBase {
 
     private final Robot robot = Robot.getInstance();
 
-    public double target;
+    public double targetPIDF;
+    public int targetRTP;
 
     public boolean outtakeReached;
     public boolean outtakeRetracted;
@@ -22,7 +24,7 @@ public class Deposit extends SubsystemBase {
         setTurret(DepositTurretState.STRAIGHT);
         setWrist(DepositWristState.TRANSFER);
         setClaw(DepositClawState.OPEN);
-        setOuttakeTarget(0);
+        setOuttakeTargetPIDF(0);
         outtakePIDF.setTolerance(3);
     }
 
@@ -60,18 +62,31 @@ public class Deposit extends SubsystemBase {
     public static DepositClawState depositClawState = DepositClawState.OPEN;
     private static final PIDFController outtakePIDF = new PIDFController(0,0,0, 0);
 
-    public void setOuttakeTarget(double target) {
-        this.target = Range.clip(target, 0, OUTTAKE_SLIDES_MAX_EXTENSION);
-        outtakePIDF.setSetPoint(this.target);
+    public void setOuttakeTargetPIDF(double targetPIDF) {
+        this.targetPIDF = Range.clip(targetPIDF, 0, OUTTAKE_SLIDES_MAX_EXTENSION);
+        outtakePIDF.setSetPoint(this.targetPIDF);
+    }
+
+    public void setOuttakeTargetRTP(int targetRTP, double power) {
+        this.targetRTP = Range.clip(targetRTP, 0, OUTTAKE_SLIDES_MAX_EXTENSION);
+
+        robot.outtakeSlideMotor_right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.outtakeSlideMotor_left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.outtakeSlideMotor_right.setTargetPosition(targetRTP);
+        robot.outtakeSlideMotor_left.setTargetPosition(targetRTP);
+
+        robot.outtakeSlideMotor_right.setPower(power);
+        robot.outtakeSlideMotor_left.setPower(power);
     }
 
     public void autoUpdateSlides() {
-        double power = outtakePIDF.calculate(robot.outtakeSlideMotor_right.getCurrentPosition(), target);
+        double power = outtakePIDF.calculate(robot.outtakeSlideMotor_right.getCurrentPosition(), targetPIDF);
         outtakeReached = outtakePIDF.atSetPoint()
-                || (target == 0 && ((robot.outtakeSlideMotor_right.getCurrentPosition() < 5)
+                || (targetPIDF == 0 && ((robot.outtakeSlideMotor_right.getCurrentPosition() < 5)
                 || (robot.outtakeSlideMotor_left.getCurrentPosition() < 5)));
 
-        outtakeRetracted = (target <= 0) && outtakeReached;
+        outtakeRetracted = (targetPIDF <= 0) && outtakeReached;
 
         if (outtakeRetracted) {
             robot.outtakeSlideMotor_right.setPower(0);
@@ -159,9 +174,9 @@ public class Deposit extends SubsystemBase {
         }
     }
 
-    @Override
+    /*@Override
     public void periodic() {
         autoUpdateSlides();
-    }
+    }*/
 
 }
